@@ -1,6 +1,8 @@
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Random;
 
 import javax.swing.*;
 
@@ -15,9 +17,11 @@ public class GUIDemo extends JFrame
     private JPanel panel;
     private JButton biggerButton;
     private JButton smallerButton;
+    private JButton colorButton;
 
     /**
      * Set up the application.
+     * @throws InterruptedException 
      */
     public GUIDemo()
     {
@@ -27,11 +31,14 @@ public class GUIDemo extends JFrame
         panel = new JPanel();
         biggerButton = new JButton("BIGGER");
         smallerButton = new JButton("SMALLER");
+        colorButton = new JButton("COLOR");
+        colorButton.addActionListener(new ButtonHandler());
         biggerButton.addActionListener(new ButtonHandler());
         smallerButton.addActionListener(new ButtonHandler());
         add(panel);
         panel.add(biggerButton);
         panel.add(smallerButton);
+        panel.add(colorButton);
         setVisible(true);
     }
 
@@ -53,9 +60,19 @@ public class GUIDemo extends JFrame
             {
                 setSize(size.width + 10, size.height + 10);
             }
-            else
+            else if (e.getSource().equals(smallerButton))
             {
                 setSize(size.width - 10, size.height - 10);
+            }
+            else if(e.getSource().equals(colorButton))
+            {
+            	Random rand = new Random();
+            	int one = (int) ((int) 255 * rand.nextDouble());
+            	int two = (int) ((int) 255 * rand.nextDouble());
+            	int three = (int) ((int) 255 * rand.nextDouble());
+            	Color col = new Color(one, two, three);
+            	panel.setBackground(col);
+            	panel.repaint();
             }
 
         }
