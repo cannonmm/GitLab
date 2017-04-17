@@ -1,1 +1,2 @@
 # GitLab
+GitHub intro lab
